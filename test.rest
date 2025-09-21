@@ -1,0 +1,15 @@
+### Health check endpoint
+GET http://localhost:5001/health
+Accept: application/json
+
+
+
+### Register a new user
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "test2@example.com",
+  "password": "password123"
+}
