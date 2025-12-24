@@ -16,6 +16,17 @@ class OutfitController {
     }
   }
 
+  static async getSavedRecommendations(req, res, next) {
+    try {
+      const userId = req.user.id;
+      const savedOutfits = await Outfit.findSavedByUserId(userId);
+      res.json(savedOutfits);
+    } catch (error) {
+      console.error('Error fetching saved recommendations:', error);
+      next(error);
+    }
+  }
+
   static async saveRecommendation(req, res, next) {
     try {
       const { outfitId } = req.body;
@@ -26,6 +37,21 @@ class OutfitController {
       res.json(saved);
     } catch (error) {
       console.error('Error saving recommendation:', error);
+      next(error);
+    }
+  }
+
+  // NEW METHOD: Handle removal
+  static async removeSavedRecommendation(req, res, next) {
+    try {
+      const { outfitId } = req.params;
+      const userId = req.user.id;
+      
+      await Outfit.removeForUser(userId, outfitId);
+      
+      res.json({ success: true, message: 'Outfit removed from saved items' });
+    } catch (error) {
+      console.error('Error removing saved recommendation:', error);
       next(error);
     }
   }

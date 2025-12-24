@@ -9,10 +9,23 @@ router.get(
   OutfitController.getRecommendations
 );
 
+router.get(
+  '/saved',
+  authMiddleware,
+  OutfitController.getSavedRecommendations
+);
+
 router.post(
   '/save',
   authMiddleware,
   OutfitController.saveRecommendation
+);
+
+// NEW ROUTE: Delete a saved outfit
+router.delete(
+  '/saved/:outfitId',
+  authMiddleware,
+  OutfitController.removeSavedRecommendation
 );
 
 module.exports = router;
