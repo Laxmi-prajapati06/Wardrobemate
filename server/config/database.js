@@ -1,5 +1,6 @@
+// 1. ADD THESE TWO LINES AT THE VERY TOP
 const dns = require('dns');
-dns.setDefaultResultOrder('ipv4first'); 
+dns.setDefaultResultOrder('ipv4first');
 
 const { Pool } = require('pg');
 const { DB_CONFIG } = require('./config');
