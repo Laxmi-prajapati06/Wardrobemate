@@ -1,3 +1,6 @@
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
+
 const app = require('./app');
 const { PORT } = require('./config/config'); 
 const { connectDB } = require('./config/database');

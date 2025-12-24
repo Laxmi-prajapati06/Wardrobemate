@@ -1,11 +1,6 @@
-// 1. ADD THESE TWO LINES AT THE VERY TOP (Crucial for Render/Supabase)
-const dns = require('dns');
-dns.setDefaultResultOrder('ipv4first');
-
 const { Pool } = require('pg');
 const { DB_CONFIG } = require('./config');
 
-// Validate DB_CONFIG before creating the pool
 if (!DB_CONFIG) {
   throw new Error('DB_CONFIG is not defined. Check your config file.');
 }
