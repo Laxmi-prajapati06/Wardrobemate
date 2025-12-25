@@ -143,7 +143,7 @@ def analyze_skin_tone():
             return jsonify({"error": "No image"}), 400
             
         image_file = request.files['image']
-        print(f"📂 File received: {file.filename}", flush=True)
+        print(f"📂 File received: {image_file.filename}", flush=True)
         
         # Validate file type
         if not image_file.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
