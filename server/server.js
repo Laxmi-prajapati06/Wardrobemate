@@ -1,13 +1,23 @@
 const dns = require('dns');
-dns.setDefaultResultOrder('ipv4first');
+try {
+  dns.setDefaultResultOrder('ipv4first');
+} catch (error) {
+  console.error('Failed to set DNS order:', error);
+}
+
+require('dotenv').config();
 
 const app = require('./app');
-const { PORT } = require('./config/config'); 
 const { connectDB } = require('./config/database');
 
-// Connect to database
+const PORT = process.env.PORT || 5000;
 connectDB();
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`📡 Accepting requests from: ${process.env.CLIENT_URL || 'All Origins'}`);
+});
+
+server.on('error', (err) => {
+  console.error('❌ Server failed to start:', err.message);
 });

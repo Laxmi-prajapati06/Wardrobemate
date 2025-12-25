@@ -1,4 +1,3 @@
-// ✅ FORCE IPv4 AT THE SOURCE
 const dns = require('dns');
 try {
   dns.setDefaultResultOrder('ipv4first');

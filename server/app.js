@@ -12,7 +12,13 @@ const outfitRoutes = require('./routes/outfits');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://outfit-client.onrender.com', 
+    'http://localhost:3000'             
+  ],
+  credentials: true
+}));
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
