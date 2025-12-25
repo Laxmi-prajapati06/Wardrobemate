@@ -19,7 +19,8 @@ class SkinToneController {
       const formData = new FormData();
       formData.append('image', fs.createReadStream(req.file.path));
       
-      const response = await axios.post('http://localhost:5001/analyze', formData, {
+      const ML_URL = process.env.ML_API_URL || 'http://127.0.0.1:5000';
+      const response = await axios.post(`${ML_URL}/analyze`, formData, {
         headers: {
           ...formData.getHeaders(),
         },
