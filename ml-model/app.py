@@ -136,11 +136,14 @@ analyzer = SkinToneAnalyzer()
 
 @app.route('/analyze', methods=['POST'])
 def analyze_skin_tone():
+    print("📸 Request received!", flush=True) # Check logs for this
     try:
         if 'image' not in request.files:
-            return jsonify({'error': 'No image file provided'}), 400
-        
+            print("❌ No image found in request", flush=True)
+            return jsonify({"error": "No image"}), 400
+            
         image_file = request.files['image']
+        print(f"📂 File received: {file.filename}", flush=True)
         
         # Validate file type
         if not image_file.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
