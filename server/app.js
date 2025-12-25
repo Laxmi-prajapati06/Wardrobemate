@@ -13,12 +13,15 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: [
-    'https://outfit-client.onrender.com', 
-    'http://localhost:3000'             
-  ],
+  origin: process.env.CLIENT_URL || '*', // Allow your frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow all these methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
   credentials: true
 }));
+
+app.options('*', cors());
+
+app.use(express.json());
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
